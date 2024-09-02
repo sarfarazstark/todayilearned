@@ -111,11 +111,11 @@ h1 {
 
 .tag {
   text-transform: uppercase;
+  line-height: 100%;
   font-size: 0.8em;
   font-family: "Coiny", sans-serif;
-  padding-top: 0.1875em;
-  padding-left: 0.625em;
-  padding-right: 0.625em;
+  padding: 0.3em 0.625em 0.2em 0.625em;
+  /* 3px 10px 2px */
   border-radius: 1em;
 }
 
@@ -124,24 +124,31 @@ h1 {
   flex-shrink: 0;
 
   display: flex;
+  align-items: center;
   gap: 0.5em;
 }
 
-.vote-buttons button {
+.vote-buttons p {
   border: none;
   background-color: #78716c;
   font-size: 0.8em;
-  padding: 0.2em 0.5em;
+  line-height: normal;
+  padding: 0.2em 0.5em 0.3em 0.5em;
+  /* 2px 5px 3px */
   border-radius: 1em;
   color: inherit;
   font-family: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s;
 }
 
-.vote-buttons button:hover {
+.vote-buttons label p:hover {
   background-color: #292524;
+}
+
+.vote-buttons input[type="checkbox"]:checked + p {
+  border: 2px solid #ffffff;
 }
 
 ul {
@@ -167,7 +174,7 @@ ul {
   line-height: normal;
   text-transform: uppercase;
   font-size: 1.2em;
-  padding: 1em 0 0.8em;
+  padding: 0.5em 0 0.3em;
   background-image: linear-gradient(135deg, #3b82f6, #ef4444, #16a34a, #eab308);
   color: inherit;
   border-radius: 100px;
@@ -181,7 +188,7 @@ ul {
 
 .btn-large {
   font-size: 1.25em;
-  padding: 0.8em 2em;
+  padding: 0.5em 2em 0.3em;
 }
 
 .btn-all-categories {
@@ -237,7 +244,7 @@ ul {
   margin-right: 0.7em;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1025px) {
   body {
     padding: 2em 3.2em;
   }
@@ -312,9 +319,7 @@ ul {
 
   .fact .tag {
     font-size: 0.8em;
-    padding-top: 0.125em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding: 0.2em 0.5em 0.4em 0.5em;
   }
 
   .vote-buttons {
@@ -372,7 +377,7 @@ ul {
 
   .btn {
     font-size: 0.9em;
-    padding: 1em 0 0.8em;
+    padding: 1.2em 0.8em 1.4em 0.8em;
   }
 
   .fact .tag {
@@ -382,14 +387,15 @@ ul {
     padding-right: 0.5em;
   }
 
-  .vote-buttons button {
+  .vote-buttons p {
     font-size: 0.7em;
-    padding: 0.2em 0.5em 0.3em;
+    padding: 0.3em 0.5em;
   }
 
   .btn-large {
     font-size: 1em;
-    padding: 0.8em 2em;
+    line-height: 100%;
+    padding: 0.8em 2em 0.9em 0.8em;
   }
 }
 
