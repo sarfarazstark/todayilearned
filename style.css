@@ -4,11 +4,24 @@
   box-sizing: border-box;
 }
 
+.hidden {
+  padding: 0 !important;
+  margin: 0 !important;
+  /* visibility: hidden; */
+  transform: scale(0);
+  height: 0;
+}
+
+
 body {
   background-color: #292524;
   color: #fafaf9;
   font-family: "Sono", sans-serif;
-  padding: 48px 64px;
+  padding: 3.2em 4.8em;
+  scrollbar-width: thin;
+  /* 3px wide */
+  scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
+  /* Thumb color, Track color */
 }
 
 /* MAIN LAYOUT */
@@ -18,7 +31,7 @@ body {
 }
 
 .header {
-  margin-bottom: 40px;
+  margin-bottom: 2.5em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,8 +39,8 @@ body {
 
 .main {
   display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 48px;
+  grid-template-columns: 15.625em 1fr;
+  gap: 3.2em;
 }
 
 @media (max-width: 900px) {
@@ -41,12 +54,12 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1.6em;
 }
 
 .logo img {
-  width: 68px;
-  height: 68px;
+  width: 4.25em;
+  height: 4.25em;
 }
 
 h1 {
@@ -54,43 +67,56 @@ h1 {
   text-transform: uppercase;
   font-family: "Coiny", sans-serif;
   line-height: 1;
-  margin-top: 6px;
+  margin-top: 0.375em;
 }
 
 .category {
-  margin-bottom: 16px;
+  margin-bottom: 1em;
 }
 
 .fact {
-  font-size: 20px;
+  font-size: 1.25em;
   line-height: 1.4;
   background-color: #44403c;
-  margin-bottom: 16px;
-  padding: 16px 24px;
-  letter-spacing: -1px;
-  border-radius: 16px;
+  margin-bottom: 1em;
+  padding: 1.2em 1.8em;
+  letter-spacing: -0.0625em;
+  border-radius: 1em;
 
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 1.5em;
 }
 
 @media (max-width: 1200px) {
   .fact {
     flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
-    gap: 12px;
+    gap: 0.75em;
+  }
+
+  .fact-form {
+    flex-wrap: wrap;
+  }
+
+  .fact-form input:first-child {
+    width: 90%;
+  }
+
+  .fact-form input.source {
+    width: 45%;
   }
 }
 
 .tag {
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 0.8em;
   font-family: "Coiny", sans-serif;
-  padding-top: 3px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 100px;
+  padding-top: 0.1875em;
+  padding-left: 0.625em;
+  padding-right: 0.625em;
+  border-radius: 1em;
 }
 
 .vote-buttons {
@@ -98,15 +124,15 @@ h1 {
   flex-shrink: 0;
 
   display: flex;
-  gap: 8px;
+  gap: 0.5em;
 }
 
 .vote-buttons button {
   border: none;
   background-color: #78716c;
-  font-size: 18px;
-  padding: 6px 12px;
-  border-radius: 100px;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  border-radius: 1em;
   color: inherit;
   font-family: inherit;
   font-weight: 600;
@@ -126,7 +152,7 @@ ul {
 .source:visited {
   color: #a8a29e;
   text-decoration: none;
-  margin-left: 12px;
+  margin-left: 0.75em;
   transition: 0.3s;
 }
 
@@ -138,10 +164,10 @@ ul {
 .btn {
   border: none;
   font-family: "Coiny", sans-serif;
-  line-height: 1;
+  line-height: normal;
   text-transform: uppercase;
-  font-size: 17px;
-  padding: 16px 0 13px;
+  font-size: 1.2em;
+  padding: 1em 0 0.8em;
   background-image: linear-gradient(135deg, #3b82f6, #ef4444, #16a34a, #eab308);
   color: inherit;
   border-radius: 100px;
@@ -154,12 +180,12 @@ ul {
 }
 
 .btn-large {
-  font-size: 20px;
-  padding: 20px 32px 17px;
+  font-size: 1.25em;
+  padding: 0.8em 2em;
 }
 
 .btn-all-categories {
-  margin-bottom: 16px;
+  margin-bottom: 1em;
   width: 100%;
 }
 
@@ -171,27 +197,29 @@ ul {
 /* FORM */
 .fact-form {
   background-color: #44403c;
-  margin-bottom: 40px;
-  padding: 16px 32px;
+  margin-bottom: 2.5em;
+  padding: 1em 2em;
   display: flex;
   align-items: center;
-  gap: 16px;
-  border-radius: 16px;
+  gap: 1.6em;
+  border-radius: 1.6em;
+  transform-origin: top left;
+  transition: transform 0.2s, height 1s;
 }
 
 .fact-form input,
 .fact-form select {
-  width: 22%;
+  /* width: 2.75em; */
   background-color: #78716c;
   border: none;
   border-radius: 100px;
-  padding: 16px;
-  font-size: 18px;
+  padding: 1em;
+  font-size: 1.2em;
   color: inherit;
   font-family: inherit;
 
   &:focus {
-    outline: 2px solid #3b82f6;
+    outline: 0.125em solid #3b82f6;
   }
 }
 
@@ -205,25 +233,25 @@ ul {
 
 .fact-form span {
   font-weight: 600;
-  font-size: 18px;
-  margin-right: 18px;
+  font-size: 1.2em;
+  margin-right: 0.7em;
 }
 
 @media (max-width: 1000px) {
   body {
-    padding: 32px 48px;
+    padding: 2em 3.2em;
   }
 
   .fact-form {
     flex-direction: column;
     align-items: stretch;
-    padding: 32px;
+    padding: 2em;
 
   }
 
-  .fact-form input,
-  .fact-form select {
-    width: auto;
+  form.fact-form input,
+  form.fact-form select {
+    width: 100% !important;
   }
 }
 
@@ -231,7 +259,7 @@ ul {
 
 @media (max-width: 600px) {
   body {
-    padding: 24px 32px;
+    padding: 1.5em 2.5em;
   }
 
   .header {
@@ -240,7 +268,7 @@ ul {
   }
 
   .logo {
-    margin-bottom: 24px;
+    margin-bottom: 1.5em;
   }
 
   .logo h1 {
@@ -249,36 +277,48 @@ ul {
 
   .main {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 2em;
   }
 
   .fact {
-    padding: 16px 24px;
+    padding: 0.8em 1.4em;
     /* align-items: center; */
-    gap: 16px;
+    gap: 1.6em;
   }
 
   .fact p {
-    font-size: 18px;
+    font-size: 1em;
   }
 
   .fact-form {
-    padding: 24px;
+    padding: 1.5em;
   }
 
   .fact-form input,
   .fact-form select {
-    padding: 12px;
-    font-size: 16px;
+    padding: 1.2em;
+    font-size: 1em;
+  }
+
+  .fact-form span {
+    text-align: center;
+    font-size: 1em;
   }
 
   .btn {
-    font-size: 16px;
-    padding: 12px 0 10px;
+    font-size: 1em;
+    padding: 1.2em 0 1em;
+  }
+
+  .fact .tag {
+    font-size: 0.8em;
+    padding-top: 0.125em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
 
   .vote-buttons {
-    font-size: 16px;
+    font-size: 1.3em;
     padding: 0;
     margin-left: 0;
     width: 100%;
@@ -287,7 +327,90 @@ ul {
   }
 
   .btn-large {
-    font-size: 18px;
-    padding: 16px 24px 14px;
+    font-size: 1.125em;
+    padding: 1em 2.4em 1em;
   }
+}
+
+/* Screen under 375px */
+
+@media (max-width: 376px) {
+  body {
+    padding: 1em 2em;
+  }
+
+  .logo h1 {
+    font-size: 1.8em;
+  }
+
+  .fact {
+    padding: 0.6em 1.2em;
+    gap: 1.2em;
+  }
+
+  .fact p {
+    font-size: 0.9em;
+  }
+
+  .fact .tag {
+    font-size: 0.7em;
+  }
+
+  .fact-form {
+    padding: 1em;
+  }
+
+  .fact-form input,
+  .fact-form select {
+    padding: 1em;
+    font-size: 0.9em;
+  }
+
+  .fact-form span {
+    font-size: 0.9em;
+  }
+
+  .btn {
+    font-size: 0.9em;
+    padding: 1em 0 0.8em;
+  }
+
+  .fact .tag {
+    font-size: 0.7em;
+    padding-top: 0.125em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .vote-buttons button {
+    font-size: 0.7em;
+    padding: 0.2em 0.5em 0.3em;
+  }
+
+  .btn-large {
+    font-size: 1em;
+    padding: 0.8em 2em;
+  }
+}
+
+/* For Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  /* 10% opacity for track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  /* 50% opacity for thumb */
+  border-radius: 10px;
+  /* Optional: round the corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.7);
+  /* Darker thumb on hover */
 }
