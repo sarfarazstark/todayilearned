@@ -92,7 +92,7 @@ h1 {
   .fact {
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 0.75em;
   }
 
@@ -107,6 +107,11 @@ h1 {
   .fact-form input.source {
     width: 45%;
   }
+
+
+  .vote-buttons {
+    margin-left: auto;
+  }
 }
 
 .tag {
@@ -117,10 +122,11 @@ h1 {
   padding: 0.3em 0.625em 0.2em 0.625em;
   /* 3px 10px 2px */
   border-radius: 1em;
+  margin-left: auto;
+
 }
 
 .vote-buttons {
-  margin-left: auto;
   flex-shrink: 0;
 
   display: flex;
@@ -141,6 +147,12 @@ h1 {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
 }
 
 .vote-buttons label p:hover {
