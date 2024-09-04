@@ -1,7 +1,6 @@
-import { func } from 'prop-types';
 import './style.css';
-import { useState } from 'react';
-import { functionTypeParam } from '@babel/types';
+import { useEffect, useState } from 'react';
+import supabase from './supabase';
 
 const initialFacts = [
 	{
@@ -59,7 +58,24 @@ function Counter() {
 function App() {
 	//1. Defining a state variable
 	const [showForm, setShowForm] = useState(false);
-	const [facts, setFacts] = useState(initialFacts);
+	const [facts, setFacts] = useState([]);
+	const [loading, setLoading] = useState(false);
+
+	useEffect(function () {
+		async function fetchData() {
+			setLoading(true);
+			const { data: facts, error } = await supabase
+				.from('facts')
+				.select('*')
+				.order('votesInteresting', { ascending: false })
+				.limit(100);
+
+			setLoading(false);
+			if (!error) setFacts(facts);
+			else alert('An error occurred. Please try again later.');
+		}
+		fetchData();
+	}, []);
 
 	return (
 		<>
@@ -74,10 +90,14 @@ function App() {
 
 			<main className="main">
 				<CategoryFilter />
-				<FactList facts={facts} />
+				{loading ? <Loader /> : <FactList facts={facts} />}
 			</main>
 		</>
 	);
+}
+
+function Loader() {
+	return <p className="message">Loading...</p>;
 }
 
 function Header({ setShowForm, showForm }) {
