@@ -10,8 +10,18 @@
   /* visibility: hidden; */
   transform: scale(0);
   height: 0;
+  transition-delay: 0.2s;
 }
 
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fafaf9;
+  font-size: 2em;
+  font-family: "Coiny", sans-serif;
+  text-align: center;
+}
 
 body {
   background-color: #292524;
@@ -226,7 +236,7 @@ a.source:active {
   gap: 1.6em;
   border-radius: 1em;
   transform-origin: top left;
-  transition: transform 0.2s, height 1s;
+  transition: transform 0.2s, height 0.2s;
 }
 
 .fact-form input,
