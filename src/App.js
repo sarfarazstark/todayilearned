@@ -158,29 +158,35 @@ function NewFactForm({ showForm, setShowForm, setFacts }) {
 	const [text, setText] = useState('');
 	const [source, setSource] = useState('https://example.com');
 	const [category, setCategory] = useState('');
+	const [isUploading, setIsUploading] = useState(false);
 	const textLength = text.length;
 
-	const handleSubmit = function (e) {
+	const handleSubmit = async function (e) {
 		e.preventDefault();
-		console.log(text, source, category);
 
 		// Check if data is valid. if so, create a new fact
 		if (text && isValidHttpUrl(source) && category) {
-			console.log('Valid data');
 			// Create a new fact object
-			const newFact = {
-				id: Date.now(),
-				text,
-				source,
-				category,
-				votesInteresting: 0,
-				votesMindblowing: 0,
-				votesFalse: 0,
-				createdIn: new Date().getFullYear(),
-			};
-			// Add the new fact to the facts state
+			// const newFact = {
+			// 	id: Date.now(),
+			// 	text,
+			// 	source,
+			// 	category,
+			// 	votesInteresting: 0,
+			// 	votesMindblowing: 0,
+			// 	votesFalse: 0,
+			// 	createdIn: new Date().getFullYear(),
+			// };
+			setIsUploading(true);
+			// 3. Upload the fact to supabase and receive the new fact
+			const { data: newFact, error } = await supabase
+				.from('facts')
+				.insert([{ text, source, category }])
+				.select();
 
-			setFacts((facts) => [newFact, ...facts]);
+			// Add the new fact to the facts state
+			setFacts((facts) => [newFact[0], ...facts]);
+			setIsUploading(false);
 
 			// Clear the form
 
@@ -202,6 +208,7 @@ function NewFactForm({ showForm, setShowForm, setFacts }) {
 				value={text}
 				onChange={(e) => setText(e.target.value)}
 				maxLength={200}
+				disabled={isUploading}
 			/>
 
 			<span>{200 - textLength}</span>
@@ -212,9 +219,14 @@ function NewFactForm({ showForm, setShowForm, setFacts }) {
 				placeholder="Trustworthy source..."
 				value={source}
 				onChange={(e) => setSource(e.target.value)}
+				disabled={isUploading}
 			/>
 
-			<select value={category} onChange={(e) => setCategory(e.target.value)}>
+			<select
+				value={category}
+				onChange={(e) => setCategory(e.target.value)}
+				disabled={isUploading}
+			>
 				<option value="">Choose category:</option>
 
 				{CATEGORIES.map((category) => (
@@ -224,7 +236,9 @@ function NewFactForm({ showForm, setShowForm, setFacts }) {
 				))}
 			</select>
 
-			<button className="btn btn-large">Post</button>
+			<button className="btn btn-large" disabled={isUploading}>
+				Post
+			</button>
 		</form>
 	);
 }
@@ -279,6 +293,10 @@ function FactList({ facts }) {
 }
 
 function Fact({ fact }) {
+	function handleVote() {
+		console.log('Voting for fact', fact.id, fact.text);
+	}
+
 	return (
 		<li className="fact">
 			<p>
@@ -303,35 +321,41 @@ function Fact({ fact }) {
 				{fact.category}
 			</span>
 			<div className="vote-buttons">
-				<VotesInteresting vote={fact.votesInteresting} />
-				<VotesMindblowing vote={fact.votesMindblowing} />
-				<VotesFalse vote={fact.votesFalse} />
+				<VotesInteresting
+					vote={fact.votesInteresting}
+					handleVote={handleVote}
+				/>
+				<VotesMindblowing
+					vote={fact.votesMindblowing}
+					handleVote={handleVote}
+				/>
+				<VotesFalse vote={fact.votesFalse} handleVote={handleVote} />
 			</div>
 		</li>
 	);
 }
 
-function VotesInteresting({ vote }) {
+function VotesInteresting({ vote, handleVote }) {
 	return (
-		<label>
+		<label onClick={handleVote}>
 			<input type="checkbox" name="" id="" style={{ display: 'none' }} />
 			<p>👍 {vote}</p>
 		</label>
 	);
 }
 
-function VotesMindblowing({ vote }) {
+function VotesMindblowing({ vote, handleVote }) {
 	return (
-		<label>
+		<label onClick={handleVote}>
 			<input type="checkbox" name="" id="" style={{ display: 'none' }} />
 			<p>🤯 {vote}</p>
 		</label>
 	);
 }
 
-function VotesFalse({ vote }) {
+function VotesFalse({ vote, handleVote }) {
 	return (
-		<label>
+		<label onClick={handleVote}>
 			<input type="checkbox" name="" id="" style={{ display: 'none' }} />
 			<p>⛔ {vote}</p>
 		</label>
