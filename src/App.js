@@ -412,5 +412,3 @@ function VotesFalse({ votesFalse, handleVote, isUpdating }) {
 }
 
 export default App;
-
-// The  App  component is a simple header with a logo and a button. The button is used to toggle the form that allows users to share a fact.
