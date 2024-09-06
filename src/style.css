@@ -171,7 +171,21 @@ h1 {
   background-color: #78716c;
 }
 
-.vote-buttons input[type="checkbox"]:checked + p {
+.vote-buttons label p.disabled {
+  background-color: #44403c;
+  cursor: not-allowed;
+  /* Shows the not-allowed cursor */
+  pointer-events: all;
+  /* Ensures the cursor change works */
+}
+
+.vote-buttons label p.disabled:active {
+  pointer-events: none;
+  /* Disables clicking when active (or clicked) */
+}
+
+
+.vote-buttons label input[type="checkbox"]:checked + p {
   background-color: #78716c;
   border: 2px solid #ffffff;
 }
