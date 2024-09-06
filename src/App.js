@@ -294,7 +294,8 @@ function FactList({ facts, setFacts }) {
 
 function Fact({ fact, setFacts }) {
 	const [isUpdating, setIsUpdating] = useState(false);
-
+	const ifIsDisputed =
+		fact.votesFalse > fact.votesInteresting + fact.votesMindblowing;
 	async function handleVote(e, columnName) {
 		setIsUpdating(true);
 		let error, updatedFacts;
@@ -322,6 +323,7 @@ function Fact({ fact, setFacts }) {
 	return (
 		<li className="fact">
 			<p>
+				{ifIsDisputed ? <span className="disputed">[❌Disputed]</span> : null}
 				{fact.text}
 				<a
 					className="source"
@@ -412,5 +414,3 @@ function VotesFalse({ votesFalse, handleVote, isUpdating }) {
 }
 
 export default App;
-
-// The  App  component is a simple header with a logo and a button. The button is used to toggle the form that allows users to share a fact.

@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 .hidden {
   padding: 0 !important;
   margin: 0 !important;
@@ -27,11 +28,18 @@ body {
   background-color: #292524;
   color: #fafaf9;
   font-family: "Sono", sans-serif;
-  padding: 3.2em 4.8em;
+  padding: 3.2em;
   scrollbar-width: thin;
   /* 3px wide */
   scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
   /* Thumb color, Track color */
+}
+
+.disputed {
+  color: #ef4444;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-right: 10px;
 }
 
 /* MAIN LAYOUT */
@@ -51,12 +59,18 @@ body {
   display: grid;
   grid-template-columns: 15.625em 1fr;
   gap: 3.2em;
+  height: calc(100vh - 48px - 68px - 40px);
 }
 
 @media (max-width: 900px) {
   .main {
     grid-template-columns: 1fr;
   }
+}
+
+section {
+  overflow-y: scroll;
+  padding-bottom: 4em;
 }
 
 /* ELEMENTS */
@@ -285,7 +299,7 @@ a.source:active {
 
 @media (max-width: 1025px) {
   body {
-    padding: 2em 3.2em;
+    /* padding: 2em 3.2em; */
   }
 
   .fact-form {
