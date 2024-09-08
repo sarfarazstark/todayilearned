@@ -12,6 +12,20 @@ This is a Full Stack application, basically to create and display facts along wi
 - **Deployment**: Netlify
 - **Version Control**: Git, GitHub
 
+## TODO
+
+- [x] Create a new Supabase project
+- [x] Create a new table in Supabase
+- [x] Create a new React app
+- [x] Connect the React app to Supabase
+- [x] Fetch data from the Supabase table
+- [x] Display the data in the React app
+- [x] Add a form to submit new data
+- [x] Add a voting system
+- [x] Add a category system
+- [ ] Add a authentication system
+- [ ] Make user vote only once
+
 ## Setting Up Environmental Variables
 
 To run this app with Supabase, you need to set up environmental variables. Follow these steps:
